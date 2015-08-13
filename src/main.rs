@@ -5,7 +5,7 @@ use std::process::Command;
 use std::fs::File;
 
 #[cfg(not(test))]
-use std::io::Write;
+use std::io::{BufRead, BufReader, Write};
 
 #[cfg(not(test))]
 fn main() {
@@ -21,11 +21,11 @@ macro_rules! koan {
 
 #[cfg(not(test))]
 fn seek_the_path() {
-    let koans = vec!["the_truth", "addition"];
+    let koans = BufReader::new(File::open("src/koans.txt").unwrap()).lines();
     let mut path = File::create("src/path_to_enlightenment.rs").unwrap();
 
     for koan in koans {
-        write!(&mut path, "koan!(\"{}\");\n", koan).unwrap();
+        write!(&mut path, "koan!(\"{}\");\n", koan.unwrap()).unwrap();
     }
 }
 
