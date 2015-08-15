@@ -2,15 +2,24 @@
 use std::process::Command;
 
 #[cfg(not(test))]
-use std::fs::File;
+use std::fs::{File, OpenOptions};
 
 #[cfg(not(test))]
 use std::io::{BufRead, BufReader, Write};
 
 #[cfg(not(test))]
 fn main() {
-    seek_the_path();
-    walk_the_path();
+    let message = match (walk_the_path(), seek_the_path()) {
+        (true, true) => concat!("Eternity lies ahead of us, and behind.",
+            " Your path is not yet finished."),
+
+        (true, false) => "What is the sound of one hand clapping (for you)?",
+
+        (false, _) => concat!("Meditate on your approach and return.",
+            " Mountains are merely mountains.")
+    };
+
+    println!("{}", message);
 }
 
 macro_rules! koan {
@@ -20,24 +29,32 @@ macro_rules! koan {
 }
 
 #[cfg(not(test))]
-fn seek_the_path() {
-    let koans = BufReader::new(File::open("src/koans.txt").unwrap()).lines();
-    let mut path = File::create("src/path_to_enlightenment.rs").unwrap();
+fn seek_the_path() -> bool {
+    let mut koans = BufReader::new(File::open("src/koans.txt").unwrap()).lines();
+    let mut path = OpenOptions::new()
+        .read(true)
+        .write(true)
+        .open("src/path_to_enlightenment.rs").unwrap();
+    let passed_count = BufReader::new(&path).lines().count();
 
-    for koan in koans {
-        write!(&mut path, "koan!(\"{}\");\n", koan.unwrap()).unwrap();
+    if let Some(Ok(next_koan)) = koans.nth(passed_count) {
+        println!("Ahead of you lies {}.", next_koan);
+        write!(&mut path, "koan!(\"{}\");\n", next_koan).unwrap();
+        true
+    } else {
+        println!("There will be no more tasks.");
+        false
     }
 }
 
 #[cfg(not(test))]
-fn walk_the_path() {
-    let success = Command::new("cargo")
+fn walk_the_path() -> bool {
+    Command::new("cargo")
         .arg("test")
         .arg("-q")
         .status()
         .unwrap()
-        .success();
-    println!("Enlightenment: {}", success);
+        .success()
 }
 
 #[cfg(test)]
