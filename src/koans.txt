@@ -1,2 +1,5 @@
 the_truth
 addition
+boolean
+array
+integer
