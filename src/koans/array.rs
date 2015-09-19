@@ -33,3 +33,58 @@ fn insert_at_index() {
   __ = 0;
   assert!(arr == [0, 1, 2, 3, 0]);
 }
+
+// Arrays can be iterated over.
+#[test]
+fn array_iteration() {
+  let arr: [u8; 3] = [3, 2, 1];
+  let mut iterator = arr.iter();
+  assert!(iterator.next().unwrap() == &__);
+  assert!(iterator.next().unwrap() == &__);
+  assert!(iterator.next().unwrap() == &__);
+}
+
+// Arrays can also be mutated during iteration
+#[test]
+fn array_map() {
+  let arr: [u32; 4] = [2, 5, 7, 4];
+  let mut iterator = arr.iter().map(__);
+  assert!(iterator.next() == Some(4));
+  assert!(iterator.next() == Some(10));
+  assert!(iterator.next() == Some(14));
+  assert!(iterator.next() == Some(8));
+}
+
+// You can filter an array for results that match a given condition
+#[test]
+fn array_filter() {
+  let arr: [u16; 5] = [1, 2, 3, 4, 5];
+  let mut iterator = arr.iter().filter(__);
+  assert!(iterator.next().unwrap() == &2);
+  assert!(iterator.next().unwrap() == &4);
+  assert!(iterator.next().is_none());
+}
+
+// Filter and map can be combined to do both at once
+#[test]
+fn array_filter_map() {
+  let arr: [u8; 5] = [2, 1, 2, 1, 2];
+  let mut iterator = arr.iter().filter_map(|&x|
+    if x == 1 {Some(__)} else {None}
+  );
+  assert!(iterator.next() == Some(3));
+  assert!(iterator.next() == Some(3));
+  assert!(iterator.next().is_none());
+}
+
+// This can be used for more complex logic as well
+#[test]
+fn complex_array_filter_map() {
+  let arr: [u64; 4] = [4, 8, 16, 32];
+  let mut iterator = arr.iter().filter_map(|&x|
+    if (x as f64).sqrt().floor() == (x as f64).sqrt() {Some((x as f64).sqrt() as u64)} else {None}
+  );
+  assert!(iterator.next().unwrap() == __);
+  assert!(iterator.next().unwrap() == __);
+  assert!(iterator.next().is_none());
+}
