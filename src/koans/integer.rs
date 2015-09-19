@@ -18,16 +18,19 @@ fn signed_ints() {
   assert!(i8::min_value() __ 0);
 }
 
-// Signed integers can be reduced below zero, as far as their minimum value
+// Signed integers can be reduced below zero, as far as their minimum value.
+// hint: The maximum magnitude for a negative integer is greater than
+// that of a positive integer
 #[test]
 fn sub_signed_int() {
   let mut num:i8 = 0;
-  let neg:i8 = __;
-  num += neg;
+  let negative:i8 = __;
+  num += negative;
   assert!(num == i8::min_value());
 }
 
 // Addition of positive integers works much the same for signed and unsigned numbers
+#[test]
 fn add_numbers() {
   let mut sig:i8 = 0;
   let mut unsig:u8 = 0;
