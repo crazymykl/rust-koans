@@ -6,8 +6,8 @@ fn array_index() {
   assert!(arr[__] == 1);
 }
 
-// A new fixed size array can be created by declaring
-// the type of its elements along with its length
+// A new fixed size array can be created by declaring the type of its elements
+// along with its length
 // [i32; 0] = []
 #[test]
 fn array_empty() {
@@ -23,4 +23,13 @@ fn array_empty() {
 fn out_of_index() {
   let arr: [&'static str; 5] = ["rust", "is", "mostly", "for", "nerds"];
   arr[__];
+}
+
+// Elements can be replaced in an array at a certain index.
+// hint: Without the 'mut' keyword, you won't be able to change data.
+#[test]
+fn insert_at_index() {
+  let mut arr: [u8; 5] = [0, 1, 2, 3, 4];
+  __ = 0;
+  assert!(arr == [0, 1, 2, 3, 0]);
 }
