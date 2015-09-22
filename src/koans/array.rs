@@ -88,3 +88,13 @@ fn complex_array_filter_map() {
   assert!(iterator.next().unwrap() == __);
   assert!(iterator.next().is_none());
 }
+
+// Arrays can also be iterated through using a for loop
+#[test]
+fn for_loops() {
+  let arr: [u64; 3] = [1, 2, 3];
+  let mut y: u64 = 1;
+  for x in arr.iter() {
+    assert!(*x == y);
+  }
+}
