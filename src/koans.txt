@@ -3,3 +3,4 @@ addition
 boolean
 array
 integer
+vec
