@@ -88,3 +88,25 @@ fn complex_array_filter_map() {
   assert!(iterator.next().unwrap() == __);
   assert!(iterator.next().is_none());
 }
+
+// Arrays can also be iterated through using a for loop
+#[test]
+fn for_loops() {
+  let arr: [u64; 3] = [1, 2, 3];
+  let mut y: u64 = 1;
+  for x in &arr {
+    assert!(*x == y);
+  }
+}
+
+// Let's try iterating over an array of strings to build a sentence
+#[test]
+fn for_loops_two() {
+  let words: [&'static str; 3] = ["I", "love", "Rust"];
+  let mut sentence: String = String::new();
+  for word in words.iter() {
+    __
+  }
+  println!("{:?}", sentence);
+  assert!(sentence == "I love Rust".to_string());
+}
