@@ -4,3 +4,4 @@ boolean
 array
 integer
 vec
+hash_map
