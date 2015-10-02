@@ -5,3 +5,4 @@ array
 integer
 vec
 hash_map
+struct
