@@ -70,12 +70,39 @@ fn implementing_traits2() {
   test_level_up(&mut durz);
 }
 
-// Now let's try creating a trait an implementing it for an existing type.
+// Now let's try creating a trait and implementing it for an existing type.
 #[test]
 fn creating_traits() {
   let num_one: u16 = 3;
   let num_two: u16 = 4;
 
-  assert!(!num_one.is_even());
-  assert!(num_two.is_even());
+  fn asserts<T: IsEvenOrOdd>(x: T, y: T) {
+    assert!(!x.is_even());
+    assert!(y.is_even());
+  }
+
+  asserts(num_one, num_two);
+}
+
+// We can also add trait constraints to structs that we create. Using this pattern,
+// we can use generic types and still ensure type safety.
+#[test]
+fn trait_constraints_on_structs() {
+  struct Language<T> {
+    stable_version: T,
+    latest_version: T
+  }
+
+  impl<__> Language<T> {
+    fn is_stable(&self) -> bool {
+      self.latest_version >= self.stable_version
+    }
+  }
+
+  let rust = Language {
+    stable_version: "1.3.0",
+    latest_version: "1.5.0"
+  };
+
+  assert!(rust.is_stable());
 }
