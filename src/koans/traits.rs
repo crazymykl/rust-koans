@@ -1,6 +1,7 @@
 // Traits in Rust are a way of guaranteeing particular functionality for a type.
 // They let the compiler know that a type is capable of necessary functions to
-// help it ensure safety.
+// help it ensure safety. For more information, check the book:
+// https://doc.rust-lang.org/nightly/book/traits.html
 #[test]
 fn implementing_traits() {
   struct Person {
@@ -84,8 +85,8 @@ fn creating_traits() {
   asserts(num_one, num_two);
 }
 
-// We can also add trait constraints to structs that we create. Using this pattern,
-// we can use generic types and still ensure type safety.
+// We can also add trait constraints, or "bounds", to structs that we create.
+// Using this pattern, we can use generic types and still ensure type safety.
 #[test]
 fn trait_constraints_on_structs() {
   struct Language<T> {
@@ -105,4 +106,55 @@ fn trait_constraints_on_structs() {
   };
 
   assert!(rust.is_stable());
+}
+
+// There is an alternate syntax for placing trait bounds on a function, the
+// where clause. Let's revisit a previous example, this time using 'where'.
+#[test]
+fn where_clause() {
+  let num_one: u16 = 3;
+  let num_two: u16 = 4;
+
+  trait IsEvenOrOdd {
+    fn is_even(&self) -> bool;
+  }
+
+  impl IsEvenOrOdd for u16 {
+    fn is_even(&self) -> bool {
+      self % 2 == 0
+    }
+  }
+
+  fn asserts<T>(x: T, y: T) {
+    assert!(!x.is_even());
+    assert!(y.is_even());
+  }
+
+  asserts(num_one, num_two);
+}
+
+While you can always allow the implementor of a trait declare its functions,
+you can also supply default functionality. Let's revisit IsEvenOrOdd.
+#[test]
+fn default_functions() {
+  let num_one: u16 = 3;
+  let num_two: u16 = 4;
+
+  trait IsEvenOrOdd {
+    fn is_even(&self) -> bool;
+    fn is_odd(&self) -> bool { __ }
+  }
+
+  impl IsEvenOrOdd for u16 {
+    fn is_even(&self) -> bool {
+      self % 2 == 0
+    }
+  }
+
+  fn asserts<T: IsEvenOrOdd>(x: T, y: T) {
+    assert!(x.is_odd());
+    assert!(y.is_even());
+  }
+
+  asserts(num_one, num_two);
 }
