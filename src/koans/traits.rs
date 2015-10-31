@@ -133,8 +133,8 @@ fn where_clause() {
   asserts(num_one, num_two);
 }
 
-While you can always allow the implementor of a trait declare its functions,
-you can also supply default functionality. Let's revisit IsEvenOrOdd.
+// While you can always allow the implementor of a trait declare its functions,
+// you can also supply default functionality. Let's revisit IsEvenOrOdd.
 #[test]
 fn default_functions() {
   let num_one: u16 = 3;
@@ -157,4 +157,27 @@ fn default_functions() {
   }
 
   asserts(num_one, num_two);
+}
+
+// You can also create traits that inherit from other traits.
+// In order to implement a child trait, you must first implement its parent.
+// In this example, HashMap doesn't implement PartialOrd, so it fails to
+// meet the requirements for the Ordering trait.
+#[test]
+fn inheritance() {
+  trait Ordering : PartialOrd {
+    fn is_before(&self, other: &Self) -> bool;
+  }
+
+  impl<K, V> Ordering for HashMap<K, V> {
+    fn is_before(&self, other: &Self) -> bool {
+      self < other
+    }
+  }
+
+  use std::collections::HashMap;
+  let a = HashMap::new();
+  let b = HashMap::new();
+
+  assert!(a.is_before(&b));
 }
