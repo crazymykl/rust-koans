@@ -9,14 +9,12 @@ use std::io::{BufRead, BufReader, Write};
 
 #[cfg(not(test))]
 fn main() {
-    let message = match (walk_the_path(), seek_the_path()) {
-        (true, true) => concat!("Eternity lies ahead of us, and behind.",
-            " Your path is not yet finished."),
-
-        (true, false) => "What is the sound of one hand clapping (for you)?",
-
-        (false, _) => concat!("Meditate on your approach and return.",
-            " Mountains are merely mountains.")
+    let message = match walk_the_path() {
+        true => match seek_the_path() {
+            true => "Eternity lies ahead of us, and behind. Your path is not yet finished.",
+            false => "What is the sound of one hand clapping (for you)?"
+        },
+        false => "Meditate on your approach and return. Mountains are merely mountains."
     };
 
     println!("{}", message);
