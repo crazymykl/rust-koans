@@ -15,9 +15,15 @@ fn our_first_struct() {
 
 // Let's try another example
 #[test]
-  let movie = Movie { title: "Star Wars", runtime: 121 };
+fn one_more_struct() {
+  struct Movie {
+    title: &'static str,
+    runtime: u32
+  }
 
-  assert_eq!(movie.title, "Star Wars");
+  let movie = Movie { title: "Star Wars", runtime: __ };
+
+  assert_eq!(movie.title, __;
   assert_eq!(movie.runtime, 121);
 }
 
