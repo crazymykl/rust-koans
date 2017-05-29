@@ -51,6 +51,11 @@ fn seek_the_path() -> bool {
 #[cfg(not(test))]
 fn walk_the_path() -> bool {
     Command::new("cargo")
+        .arg("clean")
+        .status()
+        .unwrap()
+        .success();
+    Command::new("cargo")
         .arg("test")
         .arg("-q")
         .status()
