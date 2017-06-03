@@ -57,7 +57,6 @@ fn walk_the_path() -> bool {
         .success();
     Command::new("cargo")
         .arg("test")
-        .arg("-q")
         .status()
         .unwrap()
         .success()
