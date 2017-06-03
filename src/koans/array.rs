@@ -111,3 +111,13 @@ fn for_loops_two() {
     println!("{:?}", sentence);
     assert!(sentence == "I love Rust".to_string());
 }
+
+// Arrays can also be iterated through using a for loop
+#[test]
+fn for_loops() {
+  let arr: [u64; 3] = [1, 2, 3];
+  let mut y: u64 = 1;
+  for x in arr.iter() {
+    assert!(*x == y);
+  }
+}

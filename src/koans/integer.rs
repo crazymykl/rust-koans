@@ -55,3 +55,20 @@ fn referencing_values() {
     mut_num += 1;
     assert!(num != mut_num);
 }
+
+// Like any variable in Rust, integers are immutable unless declared otherwise
+#[test]
+fn mutating_ints() {
+  let num:i8 = 1;
+  num += 2;
+  assert!(num == 3);
+}
+
+// While regular immutable variables cannot be changed, mutable versions
+#[test]
+fn referencing_values() {
+  let num:i8 = 1;
+  __ = num;
+  mut_num += 1;
+  assert!(num != mut_num);
+}
