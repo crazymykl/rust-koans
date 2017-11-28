@@ -9,19 +9,20 @@ use std::io::{BufRead, BufReader, Write};
 
 #[cfg(not(test))]
 fn main() {
-    let message = match walk_the_path() {
-        true => {
-            match seek_the_path() {
-                true => "Eternity lies ahead of us, and behind. Your path is not yet finished.",
-                false => "What is the sound of one hand clapping (for you)?",
-            }
+    let message = if walk_the_path() {
+        if seek_the_path() {
+            "Eternity lies ahead of us, and behind. Your path is not yet finished."
+        } else {
+            "What is the sound of one hand clapping (for you)?"
         }
-        false => "Meditate on your approach and return. Mountains are merely mountains.",
+    } else {
+        "Meditate on your approach and return. Mountains are merely mountains."
     };
 
     println!("{}", message);
 }
 
+#[allow(unused_macros)]
 macro_rules! koan {
     ($name:expr) => (
         include!(concat!("koans/", $name, ".rs"));
@@ -54,7 +55,7 @@ fn walk_the_path() -> bool {
         .arg("clean")
         .status()
         .unwrap()
-        .success();
+        .success() &&
     Command::new("cargo")
         .arg("test")
         .arg("-q")
