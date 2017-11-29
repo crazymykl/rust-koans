@@ -163,23 +163,35 @@ fn default_functions() {
 
 // You can also create traits that inherit from other traits.
 // In order to implement a child trait, you must first implement its parent.
-// In this example, HashMap doesn't implement PartialOrd, so it fails to
-// meet the requirements for the Ordering trait.
+// In this example, Bawks doesn't implement PartialOrd, so it fails to
+// meet the requirements for the Ordered trait.
 #[test]
 fn inheritance() {
-    trait Ordering: PartialOrd {
+    use std::cmp::Ordering;
+
+    #[derive(PartialEq)]
+    struct Bawks<T> {
+        thingy: T
+    }
+
+    impl<T: PartialOrd> PartialOrd for Bawks<T> {
+        fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+            __
+        }
+    }
+
+    trait Ordered: PartialOrd {
         fn is_before(&self, other: &Self) -> bool;
     }
 
-    impl<K, V> Ordering for HashMap<K, V> {
+    impl<T: PartialOrd> Ordered for Bawks<T> {
         fn is_before(&self, other: &Self) -> bool {
             self < other
         }
     }
 
-    use std::collections::HashMap;
-    let a = HashMap::new();
-    let b = HashMap::new();
+    let a = Bawks { thingy: 5.0 };
+    let b = Bawks { thingy: 7.0 };
 
     assert!(a.is_before(&b));
 }

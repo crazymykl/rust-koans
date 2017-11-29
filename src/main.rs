@@ -34,7 +34,7 @@ fn seek_the_path() -> bool {
     let mut koans = BufReader::new(File::open("src/koans.txt").unwrap()).lines();
     let mut path = OpenOptions::new()
         .read(true)
-        .write(true)
+        .append(true)
         .open("src/path_to_enlightenment.rs")
         .unwrap();
     let passed_count = BufReader::new(&path).lines().count();
@@ -51,11 +51,6 @@ fn seek_the_path() -> bool {
 
 #[cfg(not(test))]
 fn walk_the_path() -> bool {
-    Command::new("cargo")
-        .arg("clean")
-        .status()
-        .unwrap()
-        .success() &&
     Command::new("cargo")
         .arg("test")
         .arg("-q")
