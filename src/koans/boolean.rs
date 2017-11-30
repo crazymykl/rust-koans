@@ -6,6 +6,7 @@ fn truth() {
 }
 
 // Likewise, two unequal values will return false when compared with ==
+// The != operator can be used to return true for an inequality
 #[test]
 fn falsehood() {
     assert!(false __ true);
