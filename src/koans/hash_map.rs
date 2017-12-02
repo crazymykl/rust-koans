@@ -101,7 +101,7 @@ fn iterating_2() {
     }
 }
 
-// If we no longer need the contens of a HashMap, it can be cleared and reused
+// If we no longer need the content of a HashMap, it can be cleared and reused
 #[test]
 fn clearing() {
     let mut map = HashMap::new();

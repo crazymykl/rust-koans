@@ -20,7 +20,7 @@ fn adding_to_vecs() {
     assert!(vector.len() == 4);
 }
 
-// Elements can also be remove from mutable Vecs
+// Elements can also be removed from mutable Vecs
 #[test]
 fn removing_from_end_of_vecs() {
     let mut vector = vec![0, 1, 2, 3];
