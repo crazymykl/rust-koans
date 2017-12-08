@@ -4,6 +4,7 @@ boolean
 array
 integer
 vec
+string
 hash_map
 struct
 ownership
