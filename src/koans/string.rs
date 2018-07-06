@@ -35,7 +35,7 @@ fn string_to_slice() {
     assert!(slice == "Can't stop me now");
 }
 
-// You can concat a String to a &str at the end
+// You can concat a &str to a String at the end
 #[test]
 fn strings_with_strs() {
     let hello = "Hello ".to_string();
