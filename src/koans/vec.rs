@@ -86,7 +86,7 @@ fn truncate() {
     assert_eq!(vector, vec![1, 2]);
 }
 
-// New elements can be stuffed into mutable Vecors
+// New elements can be stuffed into mutable Vectors
 #[test]
 fn insert() {
     let mut vector = vec![1, 2, 3, 4, 5];
