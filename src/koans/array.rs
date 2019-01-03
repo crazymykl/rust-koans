@@ -22,7 +22,8 @@ fn array_empty() {
 #[should_panic]
 fn out_of_index() {
     let arr: [&'static str; 5] = ["rust", "is", "mostly", "for", "nerds"];
-    arr[__];
+    let i = __;
+    arr[i];
 }
 
 // Elements can be replaced in an array at a certain index.
@@ -94,7 +95,7 @@ fn complex_array_filter_map() {
 #[test]
 fn for_loops() {
     let arr: [u64; 3] = [1, 2, 3];
-    let mut y: u64 = 1;
+    let y: u64 = 1;
     for x in &arr {
         assert!(*x == y);
     }
