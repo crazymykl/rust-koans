@@ -44,7 +44,7 @@ fn strings_with_strs() {
     assert!(hello + world == __);
 }
 
-// But two Strings require a & to coorce the second String
+// But two Strings require a & to coerce the second String
 #[test]
 fn strings_with_strings() {
     let hello = "Hello ".to_string();

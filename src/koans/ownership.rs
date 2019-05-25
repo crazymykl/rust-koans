@@ -45,7 +45,7 @@ fn copying_a_value() {
 }
 
 // The same will happen with integer types like i32. These types contain no pointers to other data.
-// It's value is entirely self-contained and can be safely copied.
+// Its value is entirely self-contained and can be safely copied.
 #[test]
 fn copying_a_value_2() {
     let num: i32 = 12;
