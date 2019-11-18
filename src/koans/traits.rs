@@ -133,7 +133,7 @@ fn where_clause() {
     asserts(num_one, num_two);
 }
 
-// While you can always allow the implementor of a trait declare its functions,
+// While you can always allow the implementor of a trait to declare its functions,
 // you can also supply default functionality. Let's revisit IsEvenOrOdd.
 #[test]
 fn default_functions() {
