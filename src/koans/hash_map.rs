@@ -119,3 +119,24 @@ fn entry() {
     assert_eq!(*map.entry(2).or_insert(15), __);
     assert_eq!(map.get(&3), __);
 }
+
+// HashMaps can be extended by adding iterators over pairs whose types line up.
+#[test]
+fn extend() {
+
+}
+
+// HashMaps can be created from iterators
+#[test]
+fn from_tuple_iter() {
+    use std::collections::hash_map::RandomState;
+    use std::iter::FromIterator;
+
+    let tuples = vec![(1,4), (2,5), (3,6), (7,8)];
+    // The state of a HashMap
+    let map: HashMap<i32, i32, RandomState> = HashMap::from_iter(tuples.into_iter());
+    
+    assert_eq!(map.get(&2), Some(&5));
+    assert_eq!(map.get(&3), Some(&6));
+    assert_eq!(map.get(&5), None);
+}
