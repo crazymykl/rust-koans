@@ -109,3 +109,13 @@ fn clearing() {
     map.insert("tables", 8);
     assert_eq!(map.get("chairs"), None);
 }
+
+// The entry method can be used to concisely insert a key only if it is missing.
+#[test]
+fn entry() {
+    let mut map = HashMap::new();
+    map.insert(2, 7);
+    assert_eq!(*map.entry(3).or_insert(9), __);
+    assert_eq!(*map.entry(2).or_insert(15), __);
+    assert_eq!(map.get(&3), __);
+}
