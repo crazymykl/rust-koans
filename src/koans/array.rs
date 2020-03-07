@@ -98,6 +98,7 @@ fn for_loops() {
     let mut y: u64 = 1;
     for x in &arr {
         assert!(*x == y);
+        __
     }
 }
 
