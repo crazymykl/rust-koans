@@ -109,3 +109,40 @@ fn clearing() {
     map.insert("tables", 8);
     assert_eq!(map.get("chairs"), None);
 }
+
+// The entry method can be used to concisely insert a key only if it is missing.
+#[test]
+fn entry() {
+    let mut map = HashMap::new();
+    map.insert(2, 7);
+    assert_eq!(*map.entry(3).or_insert(9), __);
+    assert_eq!(*map.entry(2).or_insert(15), __);
+    assert_eq!(map.get(&3), __);
+}
+
+// HashMaps can be extended by adding iterators over pairs whose types line up.
+#[test]
+fn extend() {
+    let mut map = HashMap::new();
+    map.insert("Apples", 1);
+    map.extend(vec![("Oranges",2), __].into_iter());
+    
+    assert_eq!(map.get("Apples"), Some(&1));
+    assert_eq!(map.get("Oranges"), Some(&2));
+    assert_eq!(map.get("Celery"), Some(&-2));
+}
+
+// HashMaps can also be created from iterators.
+#[test]
+fn from_tuple_iter() {
+    use std::collections::hash_map::RandomState;
+    use std::iter::FromIterator;
+
+    let tuples = vec![(1,4), (2,5), (3,6), (7,8)];
+    // The state of a HashMap
+    let map: HashMap<i32, i32, RandomState> = HashMap::from_iter(tuples.into_iter());
+    
+    assert_eq!(map.get(&2), __);
+    assert_eq!(map.get(&3), __);
+    assert_eq!(map.get(&5), __);
+}
