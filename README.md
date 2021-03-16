@@ -19,7 +19,7 @@ $ rustc --version
 ```
 Currently, a Rust version of 1.3.0 or higher is recommended.
 
-## The Path to Englightenment
+## The Path to Enlightenment
 
 In order to run the koans, **Clone** this repository, and from the root folder simply run:
 
